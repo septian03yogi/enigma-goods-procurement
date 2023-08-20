@@ -15,9 +15,9 @@ type departmentRepository struct {
 }
 
 // GetByName implements DepartmentRepository.
-func (d *departmentRepository) GetByName(DepartmentName string) (model.Department, error) {
+func (d *departmentRepository) GetByName(departmentName string) (model.Department, error) {
 	var department model.Department
-	err := d.db.Where("department_name LIKE $1", department.DepartmentName).First(&department).Error
+	err := d.db.Where("department_name LIKE $1", "%"+departmentName+"%").Find(&department).Error
 	return department, err
 }
 

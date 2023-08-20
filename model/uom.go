@@ -4,7 +4,7 @@ import "time"
 
 type Uom struct {
 	Id        string    `json:"id"`
-	Name      string    `json:"name"`
+	UomName   string    `json:"uom_name"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }

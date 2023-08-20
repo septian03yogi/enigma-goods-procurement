@@ -4,7 +4,7 @@ import "time"
 
 type Item struct {
 	Id        string    `json:"id"`
-	ItemName  string    `json:"item_mame"`
+	ItemName  string    `json:"item_name"`
 	Stock     int       `json:"stock"`
 	UomId     string    `json:"uom_id"`
 	CreatedAt time.Time `json:"create_at"`

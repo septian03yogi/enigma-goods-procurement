@@ -4,7 +4,7 @@ import "time"
 
 type Employee struct {
 	Id           string `json:"id"`
-	Name         string `json:"name"`
+	EmployeeName string `json:"employee_name"`
 	PhoneNumber  string `json:"phone_number"`
 	IsDelete     bool
 	DepartmentId string     `json:"department_id"`
