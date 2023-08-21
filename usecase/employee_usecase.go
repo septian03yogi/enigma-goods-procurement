@@ -40,6 +40,7 @@ func (e *employeeUseCase) RegisterNewEmployee(payload model.Employee) error {
 	if isExistEmployee.EmployeeName == payload.EmployeeName || payload.EmployeeName == "" {
 		return fmt.Errorf("Name required field and can not duplicate %s", payload.EmployeeName)
 	}
+
 	err := e.repo.Create(payload)
 	if err != nil {
 		return fmt.Errorf("Failed to create new employee %v", err)

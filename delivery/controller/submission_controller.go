@@ -22,7 +22,7 @@ func (s *SubmissionContoler) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	submission.Id = common.GenerateID()
+	submission.ID = common.GenerateID()
 	if err := s.submissionUC.RegisterNewSubmission(submission); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -69,7 +69,7 @@ func (s *SubmissionContoler) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingSubmission, _ := s.submissionUC.FindSubmissionById(submission.Id)
+	existingSubmission, _ := s.submissionUC.FindSubmissionById(submission.ID)
 	submission.CreatedAt = existingSubmission.CreatedAt
 	submission.UpdatedAt = time.Now()
 	if err := s.submissionUC.UpdateSubmission(submission); err != nil {

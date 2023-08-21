@@ -1,16 +1,17 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type Employee struct {
-	Id           string `json:"id"`
+	ID           string `json:"id"`
 	EmployeeName string `json:"employee_name"`
 	PhoneNumber  string `json:"phone_number"`
 	IsDelete     bool
-	DepartmentId string     `json:"department_id"`
-	CreatedAt    time.Time  `json:"created_at"`
-	UpdatedAt    time.Time  `json:"updated_at"`
-	Department   Department `gorm:"foreignKey:DepartmentId"`
+	DepartmentId string    `json:"department_id"`
+	CreatedAt    time.Time `json:"created_at"`
+	UpdatedAt    time.Time `json:"updated_at"`
 }
 
 func (Employee) TableName() string {

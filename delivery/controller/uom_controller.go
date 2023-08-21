@@ -22,7 +22,7 @@ func (u *UomController) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	uom.Id = common.GenerateID()
+	uom.ID = common.GenerateID()
 	if err := u.uomUC.RegisterNewUom(uom); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -69,7 +69,7 @@ func (u *UomController) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingUom, _ := u.uomUC.FindUomById(uom.Id)
+	existingUom, _ := u.uomUC.FindUomById(uom.ID)
 	uom.CreatedAt = existingUom.CreatedAt
 	uom.UpdatedAt = time.Now()
 	if err := u.uomUC.UpdateUom(uom); err != nil {

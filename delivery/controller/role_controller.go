@@ -22,7 +22,7 @@ func (r *RoleController) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	role.Id = common.GenerateID()
+	role.ID = common.GenerateID()
 	if err := r.roleUC.RegisterNewRole(role); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -68,7 +68,7 @@ func (r *RoleController) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingRole, _ := r.roleUC.FindByIdRole(role.Id)
+	existingRole, _ := r.roleUC.FindByIdRole(role.ID)
 	role.CreatedAt = existingRole.CreatedAt
 	role.UpdatedAt = time.Now()
 	if err := r.roleUC.UpdateRole(role); err != nil {

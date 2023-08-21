@@ -25,7 +25,7 @@ func (d *DepartmentController) createHandler(c *gin.Context) {
 		return // ini harus ada supaya gak diteruskan ke bawah
 	}
 	// cek error ketikan server tidak merespon atau ada kesalahan, keluarkan status code 500 (internal server error - SERVER)
-	department.Id = common.GenerateID()
+	department.ID = common.GenerateID()
 	if err := d.departmentUC.RegisterNewDepartment(department); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 		return // ini harus ada supaya gak diteruskan ke bawah
@@ -76,7 +76,7 @@ func (d *DepartmentController) updateHandler(c *gin.Context) {
 		return
 	}
 
-	existingDepartment, _ := d.departmentUC.FindByIdDepartment(department.Id)
+	existingDepartment, _ := d.departmentUC.FindByIdDepartment(department.ID)
 	department.CreatedAt = existingDepartment.CreatedAt
 	department.UpdatedAt = time.Now()
 	if err := d.departmentUC.UpdateDepartment(department); err != nil {

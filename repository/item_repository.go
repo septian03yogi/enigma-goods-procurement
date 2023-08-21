@@ -22,20 +22,20 @@ func (i *itemRepository) Create(payload model.Item) error {
 // Delete implements ItemRepository.
 func (i *itemRepository) Delete(id string) error {
 	var item model.Item
-	return i.db.Where("id=?", item.Id).Delete(&item).Error
+	return i.db.Where("id=?", id).Delete(&item).Error
 }
 
 // Get implements ItemRepository.
 func (i *itemRepository) Get(id string) (model.Item, error) {
 	var item model.Item
-	err := i.db.First(&item, "id=?", item.Id).Error
+	err := i.db.First(&item, "id=?", item.ID).Error
 	return item, err
 }
 
 // GetByName implements ItemRepository.
 func (i *itemRepository) GetByName(name string) (model.Item, error) {
 	var item model.Item
-	err := i.db.Where("name like $1", "%"+name+"%").Find(&item).Error
+	err := i.db.Where("item_name like $1", "%"+name+"%").Find(&item).Error
 	return item, err
 }
 

@@ -3,7 +3,7 @@ package model
 import "time"
 
 type Period struct {
-	Id         string    `json:"id"`
+	ID         string    `json:"id"`
 	PeriodName string    `json:"period_name"`
 	StartDate  time.Time `json:"start_date"`
 	EndDate    time.Time `json:"end_date"`

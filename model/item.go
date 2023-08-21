@@ -1,15 +1,17 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type Item struct {
-	Id        string    `json:"id"`
+	ID        string    `json:"id"`
 	ItemName  string    `json:"item_name"`
 	Stock     int       `json:"stock"`
-	UomId     string    `json:"uom_id"`
-	CreatedAt time.Time `json:"create_at"`
+	UomID     string    `json:"uom_id"`
+	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-	Uom       Uom       `gorm:"foreignKey:UomId"`
+	DeletedAt time.Time
 }
 
 func (Item) TableName() string {

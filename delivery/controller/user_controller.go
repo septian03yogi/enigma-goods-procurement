@@ -22,7 +22,7 @@ func (u *UserController) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	user.Id = common.GenerateID()
+	user.ID = common.GenerateID()
 	if err := u.userUC.RegisterNewUser(user); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -69,7 +69,7 @@ func (u *UserController) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingUser, _ := u.userUC.FindUserById(user.Id)
+	existingUser, _ := u.userUC.FindUserById(user.ID)
 	user.CreatedAt = existingUser.CreatedAt
 	user.UpdatedAt = time.Now()
 	if err := u.userUC.UpdateUser(user); err != nil {

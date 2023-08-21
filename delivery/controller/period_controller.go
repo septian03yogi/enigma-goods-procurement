@@ -22,7 +22,7 @@ func (p *PeriodController) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	period.Id = common.GenerateID()
+	period.ID = common.GenerateID()
 	if err := p.periodUC.RegisterNewPeriod(period); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -69,7 +69,7 @@ func (p *PeriodController) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingPeriod, _ := p.periodUC.FindByIdPeriod(period.Id)
+	existingPeriod, _ := p.periodUC.FindByIdPeriod(period.ID)
 	period.CreatedAt = existingPeriod.CreatedAt
 	period.UpdatedAt = time.Now()
 	if err := p.periodUC.UpdatePeriod(period); err != nil {

@@ -17,6 +17,7 @@ type ItemController struct {
 func (i *ItemController) createHandler(c *gin.Context) {
 	// inisiasi struct kosong untuk di lakukan bind di body json (POSTMAN)
 	var item model.Item
+	item.ID = common.GenerateID()
 	item.CreatedAt = time.Now()
 	item.UpdatedAt = time.Now()
 	// cek error ketika melakukan bind body JSON, keluarkan status code 400 (bad request - CLIENT)
@@ -25,11 +26,21 @@ func (i *ItemController) createHandler(c *gin.Context) {
 		return // ini harus ada supaya gak diteruskan ke bawah
 	}
 	// cek error ketikan server tidak merespon atau ada kesalahan, keluarkan status code 500 (internal server error - SERVER)
-	item.Id = common.GenerateID()
+
+	// uom, _ := i.uomUC.FindUomById(item.UomId)
+	// item.Uom.UomName = uom.UomName
 	if err := i.itemUC.RegisterNewItem(item); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 		return // ini harus ada supaya gak diteruskan ke bawah
 	}
+	// itemResponse := map[string]any{
+	// 	"id":         item.ID,
+	// 	"item_name":  item.ItemName,
+	// 	"stock":      item.Stock,
+	// 	"uom_name":   item.Uom.UomName,
+	// 	"created_at": item.CreatedAt,
+	// 	"updated_at": item.UpdatedAt,
+	// }
 	// jika semua aman dan tidak ada error
 	c.JSON(201, item)
 }
@@ -76,7 +87,7 @@ func (i *ItemController) updateHandler(c *gin.Context) {
 		return
 	}
 
-	existingItem, _ := i.itemUC.FindByIdItem(item.Id)
+	existingItem, _ := i.itemUC.FindByIdItem(item.ID)
 	item.CreatedAt = existingItem.CreatedAt
 	item.UpdatedAt = time.Now()
 	if err := i.itemUC.UpdateItem(item); err != nil {

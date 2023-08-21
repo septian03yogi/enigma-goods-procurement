@@ -22,7 +22,7 @@ func (s *SubStatusController) createHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	subStatus.Id = common.GenerateID()
+	subStatus.ID = common.GenerateID()
 	if err := s.subStatusUC.RegisterNewSubStatus(subStatus); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 	}
@@ -69,7 +69,7 @@ func (s *SubStatusController) updateHandler(c *gin.Context) {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return
 	}
-	existingSubStatus, _ := s.subStatusUC.FindSubStatusById(subStatus.Id)
+	existingSubStatus, _ := s.subStatusUC.FindSubStatusById(subStatus.ID)
 	subStatus.CreatedAt = existingSubStatus.CreatedAt
 	subStatus.UpdatedAt = time.Now()
 	if err := s.subStatusUC.UpdateSubStatus(subStatus); err != nil {

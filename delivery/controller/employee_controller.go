@@ -10,9 +10,8 @@ import (
 )
 
 type EmployeeController struct {
-	employeeUC   usecase.EmployeeUseCase
-	departmentUC usecase.DepartmentUseCase
-	router       *gin.Engine
+	employeeUC usecase.EmployeeUseCase
+	router     *gin.Engine
 }
 
 func (e *EmployeeController) createHandler(c *gin.Context) {
@@ -20,16 +19,13 @@ func (e *EmployeeController) createHandler(c *gin.Context) {
 	var employee model.Employee
 	employee.CreatedAt = time.Now()
 	employee.UpdatedAt = time.Now()
-	ExistingDepartment, _ := e.departmentUC.FindByIdDepartment(employee.DepartmentId)
-	employee.Department.CreatedAt = ExistingDepartment.CreatedAt
-	employee.Department.UpdatedAt = ExistingDepartment.UpdatedAt
 	// cek error ketika melakukan bind body JSON, keluarkan status code 400 (bad request - CLIENT)
 	if err := c.ShouldBindJSON(&employee); err != nil {
 		c.JSON(400, gin.H{"err": err.Error()})
 		return // ini harus ada supaya gak diteruskan ke bawah
 	}
 	// cek error ketikan server tidak merespon atau ada kesalahan, keluarkan status code 500 (internal server error - SERVER)
-	employee.Id = common.GenerateID()
+	employee.ID = common.GenerateID()
 	if err := e.employeeUC.RegisterNewEmployee(employee); err != nil {
 		c.JSON(500, gin.H{"err": err.Error()})
 		return // ini harus ada supaya gak diteruskan ke bawah
@@ -80,7 +76,7 @@ func (e *EmployeeController) updateHandler(c *gin.Context) {
 		return
 	}
 
-	existingEmployee, _ := e.employeeUC.FindByIdEmployee(employee.Id)
+	existingEmployee, _ := e.employeeUC.FindByIdEmployee(employee.ID)
 	employee.CreatedAt = existingEmployee.CreatedAt
 	employee.UpdatedAt = time.Now()
 	if err := e.employeeUC.UpdateEmployee(employee); err != nil {

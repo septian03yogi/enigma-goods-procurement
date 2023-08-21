@@ -5,6 +5,7 @@ import (
 
 	"github.com/septian03yogi/model"
 	"github.com/septian03yogi/repository"
+	"github.com/septian03yogi/utils/common"
 )
 
 type ItemUseCase interface {
@@ -40,6 +41,10 @@ func (i *itemUseCase) RegisterNewItem(payload model.Item) error {
 	if existItem.ItemName == payload.ItemName || payload.ItemName == "" {
 		return fmt.Errorf("Item Name required field and can not duplicate %s", payload.ItemName)
 	}
+	if payload.Stock == 0 {
+		return fmt.Errorf("Item Stock can not be %d", payload.Stock)
+	}
+	payload.ID = common.GenerateID()
 	err := i.repo.Create(payload)
 	if err != nil {
 		return fmt.Errorf("Failed to create new item %v", err)
