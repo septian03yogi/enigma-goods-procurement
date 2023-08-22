@@ -21,8 +21,7 @@ func (u *uomRepository) Create(payload model.Uom) error {
 
 // Delete implements UomRepository.
 func (u *uomRepository) Delete(id string) error {
-	var uom model.Uom
-	return u.db.Where("id=?", id).Delete(&uom).Error
+	return u.db.Where("id=?", id).Delete(&model.Uom{}).Error
 }
 
 // Get implements UomRepository.

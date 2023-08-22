@@ -21,14 +21,13 @@ func (i *itemRepository) Create(payload model.Item) error {
 
 // Delete implements ItemRepository.
 func (i *itemRepository) Delete(id string) error {
-	var item model.Item
-	return i.db.Where("id=?", id).Delete(&item).Error
+	return i.db.Where("id=?", id).Delete(&model.Item{}).Error
 }
 
 // Get implements ItemRepository.
 func (i *itemRepository) Get(id string) (model.Item, error) {
 	var item model.Item
-	err := i.db.First(&item, "id=?", item.ID).Error
+	err := i.db.First(&item, "id=?", id).Error
 	return item, err
 }
 

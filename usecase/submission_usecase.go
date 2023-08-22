@@ -36,11 +36,11 @@ func (s *submissionUseCase) FindSubmissionById(id string) (model.Submission, err
 
 // RegisterNewSubmission implements SubmissionUseCase.
 func (s *submissionUseCase) RegisterNewSubmission(payload model.Submission) error {
-	// existingEmployee, _ := s.repo.GetByIdEmployee(payload.EmployeeId)
-	// existingPeriod, _ := s.repo.GetByIdPeriod(payload.PeriodId)
-	// if existingEmployee.EmployeeId == payload.EmployeeId && existingPeriod.PeriodId == payload.PeriodId {
-	// 	return fmt.Errorf("Employee with ID %s can not submit in the same period ID %s", payload.EmployeeId, payload.PeriodId)
-	// }
+	existingEmployee, _ := s.repo.GetByIdEmployee(payload.EmployeeId)
+	existingPeriod, _ := s.repo.GetByIdPeriod(payload.PeriodId)
+	if existingEmployee.EmployeeId == payload.EmployeeId && existingPeriod.PeriodId == payload.PeriodId {
+		return fmt.Errorf("Employee with ID %s can not submit in the same period ID %s", payload.EmployeeId, payload.PeriodId)
+	}
 
 	err := s.repo.Create(payload)
 	if err != nil {

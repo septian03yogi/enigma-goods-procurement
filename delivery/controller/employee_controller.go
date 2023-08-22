@@ -109,7 +109,7 @@ func NewEmployeeController(usecase usecase.EmployeeUseCase, r *gin.Engine) *Empl
 	rg.POST("/employees", controller.createHandler)
 	rg.GET("/employees", controller.listHandler)
 	rg.GET("/employees/:id", controller.getHandler)
-	rg.PUT("/employees/:id", controller.updateHandler)
+	rg.PUT("/employees", controller.updateHandler)
 	rg.DELETE("/employees/:id", controller.deleteHandler)
 
 	return &controller
